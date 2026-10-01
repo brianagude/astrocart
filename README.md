@@ -9,8 +9,10 @@ npm install
 npm run dev      # local dev server
 npm run build    # production build into dist/
 npm run preview  # serve the production build locally
-npm run deploy   # build, then deploy to Cloudflare with wrangler
+npm run deploy   # build and deploy by hand (normally not needed)
 ```
+
+Pushing to `main` on GitHub deploys automatically through Cloudflare's Git integration.
 
 ## Layout
 
