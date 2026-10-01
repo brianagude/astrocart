@@ -60,23 +60,38 @@
   max-width: 64ch;
 }
 .facts {
-  display: grid;
-  grid-template-columns: max-content 1fr;
   border-top: 1px solid var(--ink);
   margin: 4px 0 0;
 }
 .facts dt,
 .facts dd {
   margin: 0;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--ink-3);
   font: 400 0.82rem var(--mono);
 }
 .facts dt {
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding-right: 16px;
+  padding: 6px 0 2px;
   color: var(--ink-2);
+}
+.facts dd {
+  padding: 0 0 6px;
+  border-bottom: 1px solid var(--ink-3);
+}
+/* label beside value once there is room; stacked below that */
+@media (min-width: 480px) {
+  .facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+  }
+  .facts dt,
+  .facts dd {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--ink-3);
+  }
+  .facts dt {
+    padding-right: 16px;
+  }
 }
 .more {
   font: 700 0.78rem var(--mono);

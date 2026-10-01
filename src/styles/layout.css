@@ -13,7 +13,7 @@
   padding-bottom: 6px;
 }
 h1 {
-  font: 500 clamp(2.5rem, 8vw, 5.2rem)/0.95 var(--sans);
+  font: 500 clamp(2.25rem, 8vw, 5.2rem)/0.95 var(--sans);
   letter-spacing: -0.035em;
   margin: 6px 0 0;
   text-wrap: balance;
