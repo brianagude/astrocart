@@ -169,6 +169,10 @@
   background: var(--ink);
   color: var(--paper);
 }
+.zoom button:disabled {
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
 .key {
   display: flex;
   gap: 14px;

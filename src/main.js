@@ -11,11 +11,13 @@ import {
   renderRec,
   updateCards,
 } from "./planets.js";
+import { expandSection, initSections } from "./sections.js";
 import { app } from "./state.js";
 import { KEY, load, persist, save } from "./storage.js";
 import { fmtOff, initTimeZones, toUTC } from "./time.js";
 import { $ } from "./util.js";
 
+initSections();
 initTimeZones();
 initPlace(() => {
   persist();
@@ -29,11 +31,15 @@ document.addEventListener("click", (e) => {
   const c = e.target.closest("[data-city]");
   if (c) {
     chooseCity(+c.dataset.city);
+    expandSection($("place"));
     $("place").scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
   const o = e.target.closest("[data-open]");
-  if (o) openRec(o.dataset.open, true);
+  if (o) {
+    expandSection($("specimens"));
+    openRec(o.dataset.open, true);
+  }
 });
 
 // Redraw everything that depends on the lines or the chosen place.

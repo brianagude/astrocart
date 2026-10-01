@@ -25,11 +25,6 @@ h1 {
 }
 
 /* section heads */
-.sec {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
 .sec-head {
   display: flex;
   justify-content: space-between;
@@ -39,6 +34,9 @@ h1 {
   border-top: 1px solid var(--rule);
   padding-top: 8px;
 }
+.sec > :not(.sec-head, .sec-body) {
+  margin-top: 14px;
+}
 h2 {
   font: 500 1.55rem/1.1 var(--sans);
   letter-spacing: -0.015em;
@@ -47,6 +45,55 @@ h2 {
 .sub {
   color: var(--ink-2);
   max-width: 62ch;
+}
+
+/* collapsible sections: the heading toggles the content beneath it */
+.sec-head:has(.sec-toggle) {
+  position: relative;
+  cursor: pointer;
+}
+.sec-toggle {
+  all: unset;
+  cursor: pointer;
+}
+.sec-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.sec-toggle:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+/* "Collapse" / "Expand", set after the small label in the heading row */
+.sec-state {
+  /* margin-left: 10px; */
+  /* text-decoration: underline; */
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+.sec-body {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.sec-body.moving,
+.sec.collapsed .sec-body {
+  overflow: hidden;
+}
+.sec.collapsed .sec-body {
+  grid-template-rows: 0fr;
+}
+.sec-inner {
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+/* an empty first item, so the gap opens space under the heading */
+.sec-inner::before {
+  content: "";
 }
 
 /* reading list + footer */

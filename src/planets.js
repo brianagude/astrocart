@@ -132,7 +132,7 @@ export function renderRec() {
       <dt>Trip around the zodiac</dt><dd>${inf.cycle}</dd>
       ${p ? `<dt>Your ${n} lines</dt><dd>${count}</dd>` : ""}
      </dl>
-     <a class="more" href="${inf.link}" target="_blank" rel="noopener">Learn more about ${n} lines ↗</a></div></div>
+     <a class="more" href="${inf.link}" target="_blank" rel="noopener">Learn more about ${n} lines</a></div></div>
    <div class="entries-label label">Line entries · 4</div>
    ${ORDER.map((a, j) => entryHTML(n, a, j)).join("")}`;
   requestAnimationFrame(() => {

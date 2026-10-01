@@ -28,6 +28,7 @@ src/
   planets.js        planet grid and the record that opens beneath it
   planet-art.js     halftone planet drawings
   place.js          city picker and place check
+  sections.js       collapsible section headings
   storage.js        saves the form to localStorage
   util.js           small shared helpers
   data/             planets, angles, readings, cities, world map outlines
