@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "astrocart",
+  "compatibility_date": "2026-09-01",
+  // Static site: Cloudflare serves the Vite build output as-is.
+  "assets": {
+    "directory": "./dist"
+  },
+  // Requires the brianagude.com zone to be on this Cloudflare account.
+  "routes": [{ "pattern": "astrocart.brianagude.com", "custom_domain": true }]
+}

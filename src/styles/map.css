@@ -1,0 +1,196 @@
+/* plate */
+.plate {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.plate-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-top: 2px solid var(--rule);
+  padding: 8px 0 10px;
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 1;
+}
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+.tab {
+  flex: none;
+  font: 400 0.74rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--paper-2);
+  border: 1px solid var(--ink);
+  border-bottom-color: var(--ink);
+  border-radius: 5px 5px 0 0;
+  padding: 6px 10px 5px;
+}
+.tab[aria-selected="true"] {
+  background: var(--paper);
+  border-bottom-color: var(--paper);
+  font-weight: 700;
+}
+.mapwrap {
+  position: relative;
+  border: 1px solid var(--ink);
+}
+.mapbox {
+  overflow-x: auto;
+}
+#map {
+  display: block;
+  width: 100%;
+  min-width: 620px;
+  height: auto;
+}
+.mapbox.zoomed #map {
+  min-width: 0;
+}
+.land {
+  fill: url(#dots);
+  stroke: var(--ink);
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+.borders {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.4;
+  opacity: 0.35;
+  vector-effect: non-scaling-stroke;
+}
+.grat {
+  stroke: var(--ink);
+  stroke-width: 0.5;
+  opacity: 0.18;
+  vector-effect: non-scaling-stroke;
+  fill: none;
+}
+.gl {
+  font-family: var(--mono);
+  fill: var(--ink-2);
+}
+.pl {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  opacity: 0.55;
+  vector-effect: non-scaling-stroke;
+}
+.pl.DSC {
+  stroke-dasharray: 5 3;
+}
+.pl.IC {
+  stroke-dasharray: 1.2 2.6;
+}
+.pl.dim {
+  opacity: 0.1;
+}
+.pl.on {
+  stroke-width: 2.2;
+  opacity: 1;
+}
+.plab {
+  font-family: var(--mono);
+  font-weight: 700;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--paper);
+}
+.mark {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+}
+.markdot {
+  fill: var(--ink);
+}
+.placelab {
+  font-family: var(--sans);
+  font-weight: 600;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--paper);
+}
+.mapempty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  padding: 16px;
+}
+.mapempty span {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 8px 12px;
+  font: 400 0.8rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+.plate-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 10px;
+}
+.zoom {
+  display: flex;
+}
+.zoom button {
+  font: 400 0.74rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 5px 10px;
+  border-radius: 0;
+}
+.zoom button + button {
+  border-left: 0;
+}
+.zoom button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+.key {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.key span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.key svg {
+  flex: none;
+}
+.summary {
+  border-top: 1px solid var(--rule);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.summary p {
+  font: italic 400 0.86rem/1.5 var(--mono);
+  color: var(--ink-2);
+  max-width: 78ch;
+}

@@ -1,0 +1,92 @@
+/* specimen grid */
+.specimens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 28px;
+}
+@media (min-width: 820px) {
+  .specimens {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    column-gap: 20px;
+  }
+}
+.spec {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--rule);
+  padding-top: 6px;
+  min-width: 0;
+}
+.spec:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+.spec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+}
+.spec-name {
+  font: 500 1rem var(--sans);
+}
+.spec-sign {
+  font: 400 0.98rem var(--serif);
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spec canvas {
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  transition: transform 0.25s ease;
+}
+.spec:hover canvas {
+  transform: scale(1.03);
+}
+.spec-cap {
+  font: 400 1rem/1.3 var(--serif);
+  text-align: center;
+  text-wrap: balance;
+  flex: 1;
+}
+.spec-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  border-top: 1px dashed var(--ink-3);
+  padding-top: 6px;
+  font: 400 0.7rem/1.35 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+.spec-foot b {
+  font-weight: 700;
+  color: var(--ink);
+  flex: none;
+}
+.spec {
+  transition: opacity 0.2s ease;
+}
+.specimens.has-open .spec[aria-expanded="false"] {
+  opacity: 0.35;
+}
+.specimens.has-open .spec[aria-expanded="false"]:hover,
+.specimens.has-open .spec[aria-expanded="false"]:focus-visible {
+  opacity: 0.8;
+}
+.spec[aria-expanded="true"] {
+  border-top-width: 3px;
+  padding-top: 4px;
+}
+.spec[aria-expanded="true"] .spec-foot b {
+  transform: rotate(45deg);
+}

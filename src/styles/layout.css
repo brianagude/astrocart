@@ -1,0 +1,83 @@
+/* masthead */
+.mast {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mast-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 6px;
+}
+h1 {
+  font: 500 clamp(2.5rem, 8vw, 5.2rem)/0.95 var(--sans);
+  letter-spacing: -0.035em;
+  margin: 6px 0 0;
+  text-wrap: balance;
+}
+.lede {
+  font-size: 1.05rem;
+  max-width: 58ch;
+  color: var(--ink);
+}
+
+/* section heads */
+.sec {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--rule);
+  padding-top: 8px;
+}
+h2 {
+  font: 500 1.55rem/1.1 var(--sans);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.sub {
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+/* reading list + footer */
+.reading {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  column-gap: 28px;
+}
+.reading li {
+  border-bottom: 1px solid var(--ink-3);
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.reading a {
+  font-weight: 500;
+}
+.reading span {
+  font-size: 0.86rem;
+  color: var(--ink-2);
+}
+footer {
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
+  font: 400 0.76rem/1.6 var(--mono);
+  color: var(--ink-2);
+}
+footer p {
+  max-width: 96ch;
+}

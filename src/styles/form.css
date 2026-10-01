@@ -1,0 +1,97 @@
+/* record + plate */
+.top {
+  display: grid;
+  gap: 28px;
+}
+@media (min-width: 900px) {
+  .top {
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+  }
+}
+.record {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.record-head {
+  border-top: 2px solid var(--rule);
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.field input,
+.field select,
+.pc input,
+.pc select {
+  font: 400 1rem var(--mono);
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 6px 0;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field select,
+.pc select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+    linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position:
+    calc(100% - 9px) 55%,
+    calc(100% - 4px) 55%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 20px;
+}
+.field input::placeholder,
+.pc input::placeholder {
+  color: var(--ink-3);
+}
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.hint {
+  font-size: 0.82rem;
+  color: var(--ink-2);
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn {
+  font: 700 0.78rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 10px 14px;
+  border-radius: 0;
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.err {
+  font: 400 0.85rem var(--mono);
+  color: var(--ink);
+  border-left: 3px solid var(--ink);
+  padding-left: 8px;
+}
