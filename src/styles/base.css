@@ -45,6 +45,12 @@ button {
   color: inherit;
   cursor: pointer;
 }
+/* hover states apply only where there is a pointer that can hover, so they don't stick after a tap */
+@media (hover: hover) {
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+}
 /* arrow after links that leave the site: drawn, so no device swaps in an emoji */
 .reading a::after,
 .more::after {

@@ -72,6 +72,11 @@ h2 {
   text-underline-offset: 3px;
   font-weight: 500;
 }
+@media (hover: hover) {
+  .sec-head:has(.sec-toggle):hover .sec-state {
+    font-weight: 700;
+  }
+}
 .sec-body {
   display: grid;
   grid-template-rows: 1fr;

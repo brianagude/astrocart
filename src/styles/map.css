@@ -36,6 +36,18 @@
   border-radius: 5px 5px 0 0;
   padding: 6px 10px 5px;
 }
+.tab,
+.zoom button {
+  transition: background-color 0.15s ease;
+}
+@media (hover: hover) {
+  .tab:not([aria-selected="true"]):hover {
+    background: var(--paper);
+  }
+  .zoom button:not(:disabled, [aria-pressed="true"]):hover {
+    background: var(--paper-2);
+  }
+}
 .tab[aria-selected="true"] {
   background: var(--paper);
   border-bottom-color: var(--paper);

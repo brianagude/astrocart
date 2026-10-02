@@ -1,5 +1,4 @@
 // Saves the form to this browser's localStorage so it survives a reload.
-import { cityLabel } from "./data/cities.js";
 import { app } from "./state.js";
 import { $ } from "./util.js";
 
@@ -24,9 +23,10 @@ export function save() {
       JSON.stringify({
         bd: $("bd").value,
         bt: $("bt").value,
-        tz: $("tz").value,
+        birth: app.birth,
         off: $("off").value,
-        city: app.selCity ? cityLabel(app.selCity) : "",
+        place: app.selCity,
+        cityFromBirth: app.cityFromBirth,
         lat: $("lat").value,
         lon: $("lon").value,
         orb: $("orb").value,

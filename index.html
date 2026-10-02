@@ -39,7 +39,7 @@
   <header class="mast">
     <div class="mast-top label"><span>Locational astrology · Field record</span><span id="recno">Record no. —</span></div>
     <h1>Astrocartography Reader</h1>
-    <p class="lede">Your birth moment, mapped onto the world. Enter when you were born to see where each planet's lines fall, what each planet stands for, and what astrologers say it brings to the places it passes.</p>
+    <p class="lede">Your birth moment, mapped onto the world. Enter when and where you were born to see where each planet's lines fall, what each planet stands for, and what astrologers say it brings to the places it passes.</p>
   </header>
 
   <div class="top">
@@ -49,9 +49,9 @@
         <div class="field"><label class="label" for="bd">Birth date</label><input type="date" id="bd" value="1995-06-15" required></div>
         <div class="field"><label class="label" for="bt">Birth time</label><input type="time" id="bt" value="09:30" required></div>
       </div>
-      <div class="field"><label class="label" for="tz">Time zone where born</label><select id="tz"></select></div>
-      <div class="field"><label class="label" for="off">UTC offset (only if you know it)</label><input id="off" placeholder="e.g. -5 or +5:30" autocomplete="off"></div>
-      <p class="hint">Filled in with an example (15 June 1995, 9:30 AM, Atlanta). Replace it with your own and press Show my lines. Use the time from your birth certificate if you can. Four minutes off moves every line about 85 km. The page applies the daylight saving rules in force on your birth date.</p>
+      <div class="field picker"><label class="label" for="bc">City where born</label><input id="bc" placeholder="Start typing, e.g. Lisbon" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="bresults" aria-autocomplete="list"><ul class="results" id="bresults" role="listbox" hidden></ul><span class="label muted" id="bzone"></span></div>
+      <div class="field"><label class="label" for="off">UTC offset (optional, overrides the city)</label><input id="off" placeholder="e.g. -5 or +5:30" autocomplete="off"></div>
+      <p class="hint">Use the time from your birth certificate if you can. Four minutes off moves every line about 85 km.</p>
       <div class="actions"><button type="submit" class="btn" id="go">Show my lines</button><button type="button" class="btn ghost" id="clear" hidden>Clear saved</button></div>
       <p class="err" id="err" hidden></p>
       <p class="label muted" id="moment"></p>
@@ -77,8 +77,7 @@
       </div>
       <div class="summary" style="margin-top:22px">
         <span class="label">A note on accuracy</span>
-        <p>Where the lines fall is real astronomy and is calculated precisely. What they mean comes from astrological tradition, mainly Jim Lewis's system from the 1970s, not from scientific research. Treat the readings as something to reflect on, not a forecast.</p>
-        <p>Your details stay in this browser. Nobody else who opens this page can see them.</p>
+        <p>Where the lines fall is real astronomy and is calculated precisely. What they mean comes from astrological tradition, mainly Jim Lewis's system from the 1970s, not from scientific research. Treat the readings as something to reflect on, not a forecast. Your details stay in this browser.</p>
       </div>
     </section>
   </div>
@@ -123,7 +122,7 @@
     </ul>
   </section>
 
-  <footer><p>Method: planet positions from Astronomy Engine 2.1.19 (geocentric, apparent, true equator of date). MC and IC lines are where a planet's right ascension meets local sidereal time; ASC and DSC lines solve the rising and setting hour angle at each latitude. Zodiac positions are tropical. Map: Natural Earth via world-atlas 2 and us-atlas 3. Cities: GeoNames via all-the-cities 3.1.0. Interpretations are summarized from astrocarto.org, StarMapper and astrocartography.app and vary between astrologers. Planet drawings are generated on this page.</p></footer>
+  <footer><p>Method: planet positions from Astronomy Engine 2.1.19 (geocentric, apparent, true equator of date). MC and IC lines are where a planet's right ascension meets local sidereal time; ASC and DSC lines solve the rising and setting hour angle at each latitude. Zodiac positions are tropical. Map: Natural Earth via world-atlas 2 and us-atlas 3. Cities: GeoNames via all-the-cities 3.1.0. Birth places and their time zones: GeoNames cities500. Interpretations are summarized from astrocarto.org, StarMapper and astrocartography.app and vary between astrologers. Planet drawings are generated on this page.</p></footer>
 </div>
 
 <noscript><p style="padding:16px;font-family:monospace">This reader calculates your lines in the browser, so it needs JavaScript turned on.</p></noscript>

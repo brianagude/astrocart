@@ -89,6 +89,21 @@
   background: transparent;
   color: var(--ink);
 }
+.btn {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+@media (hover: hover) {
+  .btn:hover {
+    background: var(--ink-2);
+    border-color: var(--ink-2);
+  }
+  .btn.ghost:hover {
+    background: var(--paper-2);
+    border-color: var(--ink);
+  }
+}
 .err {
   font: 400 0.85rem var(--mono);
   color: var(--ink);

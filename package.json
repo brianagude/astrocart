@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && wrangler deploy"
+    "deploy": "vite build && wrangler deploy",
+    "places": "node scripts/build-places.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

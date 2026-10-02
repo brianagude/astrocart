@@ -4,16 +4,11 @@ import { CITIES, cityLabel } from "./data/cities.js";
 import { READ } from "./data/readings.js";
 import { distKm, lineLonAt, strength } from "./lines.js";
 import { app } from "./state.js";
-import { $, mi, pad } from "./util.js";
+import { $, fold, mi, pad } from "./util.js";
 
 // Called after the chosen place changes; set by initPlace.
 let onChange = () => {};
 
-const fold = (t) =>
-  t
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
 function showResults() {
   const q = fold($("city").value.trim()),
     ul = $("results");
@@ -40,14 +35,27 @@ function showResults() {
   ul.hidden = false;
   $("city").setAttribute("aria-expanded", "true");
 }
-export function chooseCity(i) {
-  app.selCity = CITIES[i];
-  $("city").value = cityLabel(app.selCity);
+function setCity(c, fromBirth) {
+  app.selCity = c;
+  app.cityFromBirth = fromBirth;
+  $("city").value = cityLabel(c);
   $("lat").value = "";
   $("lon").value = "";
   $("results").hidden = true;
   $("city").setAttribute("aria-expanded", "false");
   onChange();
+}
+export const chooseCity = (i) => setCity(CITIES[i], false);
+// Point the place check at the birth city, unless the visitor has chosen a place of their own.
+export function followBirth(b) {
+  if (
+    b.lat == null ||
+    (app.selCity && !app.cityFromBirth) ||
+    $("lat").value.trim() ||
+    $("lon").value.trim()
+  )
+    return;
+  setCity([b.name, "", b.region, b.lat, b.lon], true);
 }
 export function initPlace(handler) {
   onChange = handler;
@@ -140,11 +148,13 @@ export function renderHits() {
       if (d !== null && d <= orb()) hits.push({ p, a, d });
     }
   hits.sort((x, y) => x.d - y.d);
+  // sends the visitor to the map's "Zoom to city" view
+  const zoomLink = `<p style="margin-top:10px"><button type="button" class="linkbtn" data-zoom>Zoom in to see ${pl.short} on the map</button></p>`;
   if (!hits.length) {
-    out.innerHTML = `<p class="verdict">None of your lines pass within ${orb().toLocaleString()} km of ${pl.label}.</p><p class="sub" style="margin-top:8px">In astrocartography terms that's a place without a strong planetary emphasis for you. Try a wider range, or another city.</p>`;
+    out.innerHTML = `<p class="verdict">None of your lines pass within ${orb().toLocaleString()} km of ${pl.label}.</p><p class="sub" style="margin-top:8px">In astrocartography terms that's a place without a strong planetary emphasis for you. Try a wider range, or another city.</p>${zoomLink}`;
     return;
   }
-  out.innerHTML = `<p class="verdict">${hits.length === 1 ? "One of your lines passes" : `${hits.length} of your lines pass`} within ${orb().toLocaleString()} km of ${pl.label}.</p>
+  out.innerHTML = `<p class="verdict">${hits.length === 1 ? "One of your lines passes" : `${hits.length} of your lines pass`} within ${orb().toLocaleString()} km of ${pl.label}.</p>${zoomLink}
    <div class="file" style="margin-top:16px"><div class="entries-label label" style="border-top:0">Item entries · nearest first</div>
    ${hits
      .map((h, i) => {

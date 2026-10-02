@@ -23,6 +23,12 @@
   text-transform: uppercase;
   letter-spacing: 0.07em;
 }
+@media (hover: hover) {
+  .rec-bar .x:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
 .rec-bar .x:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;

@@ -1,9 +1,10 @@
 // Entry point: wires the modules together and runs the first calculation.
+import { EXAMPLE_BIRTH, initBirthplace, setBirth } from "./birthplace.js";
 import { CITIES, cityLabel } from "./data/cities.js";
 import { initKey } from "./key.js";
 import { computeLines } from "./lines.js";
 import { applyZoom, initMap, renderTabs } from "./map.js";
-import { chooseCity, initPlace, renderHits } from "./place.js";
+import { chooseCity, followBirth, initPlace, renderHits } from "./place.js";
 import {
   initPlanets,
   layoutRec,
@@ -14,11 +15,11 @@ import {
 import { expandSection, initSections } from "./sections.js";
 import { app } from "./state.js";
 import { KEY, load, persist, save } from "./storage.js";
-import { fmtOff, initTimeZones, toUTC } from "./time.js";
+import { fmtOff, toUTC } from "./time.js";
 import { $ } from "./util.js";
 
 initSections();
-initTimeZones();
+initBirthplace(followBirth);
 initPlace(() => {
   persist();
   refresh();
@@ -39,6 +40,12 @@ document.addEventListener("click", (e) => {
   if (o) {
     expandSection($("specimens"));
     openRec(o.dataset.open, true);
+    return;
+  }
+  if (e.target.closest("[data-zoom]")) {
+    app.zoomed = true;
+    applyZoom();
+    $("map").scrollIntoView({ behavior: "smooth", block: "center" });
   }
 });
 
@@ -58,17 +65,25 @@ function run() {
     err.hidden = false;
     return false;
   }
+  // the time zone comes from the birth city unless an offset is typed in
+  const manual = $("off").value.trim();
+  if (!manual && !app.birth) {
+    err.textContent =
+      "Choose your birth city from the list, or enter your UTC offset.";
+    err.hidden = false;
+    return false;
+  }
   try {
     const { ts, off } = toUTC(
       $("bd").value,
       $("bt").value,
-      $("tz").value,
+      app.birth?.tz,
       $("off").value,
     );
     const d = new Date(ts);
     app.lines = computeLines(d);
     $("moment").textContent =
-      `Calculated for ${d.toISOString().slice(0, 16).replace("T", " ")} UTC · offset ${fmtOff(off)}`;
+      `Calculated for ${d.toISOString().slice(0, 16).replace("T", " ")} UTC · ${manual ? "" : app.birth.tz.replace(/_/g, " ") + " · "}offset ${fmtOff(off)}`;
     $("recno").textContent =
       `Record no. ${$("bd").value.replace(/-/g, "")}-${$("bt").value.replace(":", "")}`;
     refresh();
@@ -90,11 +105,12 @@ $("clear").addEventListener("click", () => {
   for (const id of ["off", "lat", "lon"]) $(id).value = "";
   $("bd").value = "1995-06-15";
   $("bt").value = "09:30";
-  $("tz").value = "America/New_York";
+  setBirth(EXAMPLE_BIRTH);
   $("city").value = "";
   app.selCity = null;
   $("clear").hidden = true;
   $("savedTag").textContent = "Example";
+  followBirth(EXAMPLE_BIRTH);
   run();
 });
 for (const id of ["orb", "lat", "lon"])
@@ -107,17 +123,18 @@ function boot() {
   if (d) {
     for (const k of ["bd", "bt", "off", "lat", "lon"])
       if (d[k]) $(k).value = d[k];
-    if (d.tz) {
-      $("tz").value = d.tz;
-      if ($("tz").selectedIndex < 0) $("tz").value = "UTC";
-    }
+    if (d.birth?.tz) setBirth(d.birth);
+    // saved before the city picker existed: only the time zone is known
+    else if (d.tz) setBirth({ label: d.tz.replace(/_/g, " "), tz: d.tz });
     if (d.orb) $("orb").value = d.orb;
-    if (d.city) {
-      const c = CITIES.find((x) => cityLabel(x) === d.city);
-      if (c) {
-        app.selCity = c;
-        $("city").value = d.city;
-      }
+    // older saves kept only the label of a city from the built-in list
+    const c = Array.isArray(d.place)
+      ? d.place
+      : d.city && CITIES.find((x) => cityLabel(x) === d.city);
+    if (c) {
+      app.selCity = c;
+      app.cityFromBirth = !!d.cityFromBirth;
+      $("city").value = cityLabel(c);
     }
     $("clear").hidden = false;
     $("savedTag").textContent = "Saved";
@@ -125,6 +142,7 @@ function boot() {
   }
   renderTabs();
   layoutRec();
+  if (!d) followBirth(EXAMPLE_BIRTH);
   if (run()) return;
   refresh();
 }

@@ -22,6 +22,7 @@ src/
   main.js           entry point: wires the modules, runs the calculation
   state.js          shared UI state
   time.js           birth time and time zone handling
+  birthplace.js     birth city picker; the chosen city sets the time zone
   lines.js          the astronomy: where each planet's lines fall
   map.js            world map, zoom, planet tabs
   key.js            map legend and "how to read the lines" diagrams
